@@ -953,6 +953,14 @@ img {
     border-radius: 50%;
 }
 
+.chai-logo-img {
+    width: 120px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+    object-fit: contain;
+}
+
 .about-card h3 {
     font-family: var(--font-display);
     font-size: 1.125rem;
@@ -1252,6 +1260,76 @@ img {
     font-size: 0.875rem;
     color: var(--text-secondary);
     font-style: italic;
+}
+
+/* Password Modal */
+.modal-password {
+    max-width: 400px;
+}
+
+.password-description {
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    margin-bottom: var(--space-lg);
+    text-align: center;
+}
+
+.password-error {
+    color: hsl(0, 70%, 55%);
+    font-size: 0.8125rem;
+    margin-top: var(--space-sm);
+    min-height: 1.2em;
+}
+
+.first-time-setup {
+    margin-top: var(--space-lg);
+    padding: var(--space-lg);
+    background: hsla(145, 60%, 50%, 0.1);
+    border-radius: var(--radius-md);
+    border: 1px solid hsla(145, 60%, 50%, 0.2);
+}
+
+.first-time-setup>p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-bottom: var(--space-md);
+}
+
+.first-time-setup .form-group:last-child {
+    margin-bottom: 0;
+}
+
+/* Admin Badge */
+.admin-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: hsla(145, 60%, 50%, 0.15);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-lg);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: hsl(145, 50%, 40%);
+}
+
+.admin-icon {
+    font-size: 1.25rem;
+}
+
+/* Divider */
+.divider {
+    border: none;
+    border-top: 1px solid hsla(25, 30%, 70%, 0.2);
+    margin: var(--space-lg) 0;
+}
+
+/* Logo clickable hint */
+.logo-section {
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* ========================================

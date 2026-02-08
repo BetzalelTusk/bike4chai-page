@@ -1,5 +1,6 @@
 // ========================================
 // BIKE4CHAI PAGE - JAVASCRIPT
+// Password-Protected Admin System
 // ========================================
 
 // DOM Elements
@@ -27,9 +28,21 @@ const elements = {
     donateBtn: document.getElementById('donateBtn'),
     donorsList: document.getElementById('donorsList'),
 
+    // Logo (for admin access trigger)
+    logoSection: document.querySelector('.logo-section'),
+
     // Buttons
-    customizeBtn: document.getElementById('customizeBtn'),
     shareBtn: document.getElementById('shareBtn'),
+
+    // Password Modal
+    passwordModal: document.getElementById('passwordModal'),
+    closePasswordModal: document.getElementById('closePasswordModal'),
+    adminPassword: document.getElementById('adminPassword'),
+    newPassword: document.getElementById('newPassword'),
+    confirmPassword: document.getElementById('confirmPassword'),
+    passwordError: document.getElementById('passwordError'),
+    firstTimeSetup: document.getElementById('firstTimeSetup'),
+    submitPasswordBtn: document.getElementById('submitPasswordBtn'),
 
     // Customize Modal
     customizeModal: document.getElementById('customizeModal'),
@@ -54,7 +67,8 @@ const elements = {
     inputRank: document.getElementById('inputRank'),
     inputMessage: document.getElementById('inputMessage'),
     inputDonateUrl: document.getElementById('inputDonateUrl'),
-    inputTheme: document.getElementById('inputTheme')
+    inputTheme: document.getElementById('inputTheme'),
+    changePassword: document.getElementById('changePassword')
 };
 
 // Default data
@@ -80,6 +94,41 @@ const defaultData = {
 
 // Current data state
 let currentData = { ...defaultData };
+
+// Admin state
+let logoClickCount = 0;
+let logoClickTimer = null;
+
+// ========================================
+// PASSWORD / SECURITY FUNCTIONS
+// ========================================
+
+// Simple hash function for password (not cryptographically secure, but sufficient for local storage)
+async function hashPassword(password) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password + 'bike4chai_salt_2024');
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function getStoredPasswordHash() {
+    return localStorage.getItem('bike4chai_admin_hash');
+}
+
+function setStoredPasswordHash(hash) {
+    localStorage.setItem('bike4chai_admin_hash', hash);
+}
+
+function isPasswordSet() {
+    return !!getStoredPasswordHash();
+}
+
+async function verifyPassword(password) {
+    const storedHash = getStoredPasswordHash();
+    const inputHash = await hashPassword(password);
+    return storedHash === inputHash;
+}
 
 // ========================================
 // UTILITY FUNCTIONS
@@ -212,6 +261,7 @@ function updateFormInputs() {
     elements.inputMessage.value = currentData.message;
     elements.inputDonateUrl.value = currentData.donateUrl;
     elements.inputTheme.value = currentData.theme;
+    elements.changePassword.value = '';
 }
 
 function updateDonorsList() {
@@ -246,6 +296,81 @@ function openModal(modal) {
 function closeModalFunc(modal) {
     modal.classList.remove('active');
     document.body.style.overflow = '';
+}
+
+function closeAllModals() {
+    closeModalFunc(elements.passwordModal);
+    closeModalFunc(elements.customizeModal);
+    closeModalFunc(elements.shareModal);
+}
+
+// ========================================
+// ADMIN ACCESS FUNCTIONS
+// ========================================
+
+function triggerAdminAccess() {
+    // Reset password modal state
+    elements.adminPassword.value = '';
+    elements.newPassword.value = '';
+    elements.confirmPassword.value = '';
+    elements.passwordError.textContent = '';
+
+    // Show/hide first time setup based on whether password is set
+    if (isPasswordSet()) {
+        elements.firstTimeSetup.style.display = 'none';
+        elements.adminPassword.parentElement.style.display = 'block';
+    } else {
+        elements.firstTimeSetup.style.display = 'block';
+        elements.adminPassword.parentElement.style.display = 'none';
+    }
+
+    openModal(elements.passwordModal);
+}
+
+async function handlePasswordSubmit() {
+    elements.passwordError.textContent = '';
+
+    if (isPasswordSet()) {
+        // Verify existing password
+        const password = elements.adminPassword.value;
+        if (!password) {
+            elements.passwordError.textContent = 'Please enter your password';
+            return;
+        }
+
+        const isValid = await verifyPassword(password);
+        if (isValid) {
+            closeModalFunc(elements.passwordModal);
+            updateFormInputs();
+            openModal(elements.customizeModal);
+            showToast('🔓 Admin mode unlocked!');
+        } else {
+            elements.passwordError.textContent = 'Incorrect password. Try again.';
+            elements.adminPassword.value = '';
+            elements.adminPassword.focus();
+        }
+    } else {
+        // First time setup - create password
+        const newPass = elements.newPassword.value;
+        const confirmPass = elements.confirmPassword.value;
+
+        if (!newPass || newPass.length < 4) {
+            elements.passwordError.textContent = 'Password must be at least 4 characters';
+            return;
+        }
+
+        if (newPass !== confirmPass) {
+            elements.passwordError.textContent = 'Passwords do not match';
+            return;
+        }
+
+        const hash = await hashPassword(newPass);
+        setStoredPasswordHash(hash);
+        closeModalFunc(elements.passwordModal);
+        updateFormInputs();
+        openModal(elements.customizeModal);
+        showToast('✅ Password created! Admin mode unlocked!');
+    }
 }
 
 // ========================================
@@ -386,6 +511,16 @@ function createParticles() {
                 transform: translateX(-50%) translateY(10px);
             }
         }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
     `;
     document.head.appendChild(style);
 }
@@ -395,46 +530,71 @@ function createParticles() {
 // ========================================
 
 function initEventListeners() {
-    // Customize button
-    elements.customizeBtn.addEventListener('click', () => {
-        updateFormInputs();
-        openModal(elements.customizeModal);
+    // Triple-click on logo to access admin
+    elements.logoSection.addEventListener('click', () => {
+        logoClickCount++;
+
+        if (logoClickTimer) {
+            clearTimeout(logoClickTimer);
+        }
+
+        logoClickTimer = setTimeout(() => {
+            logoClickCount = 0;
+        }, 500);
+
+        if (logoClickCount >= 3) {
+            logoClickCount = 0;
+            triggerAdminAccess();
+        }
     });
 
-    // Close customize modal
+    // Keyboard shortcut: Ctrl+Shift+E for admin access
+    document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.shiftKey && e.key === 'E') {
+            e.preventDefault();
+            triggerAdminAccess();
+        }
+
+        // Close modals on Escape
+        if (e.key === 'Escape') {
+            closeAllModals();
+        }
+    });
+
+    // Password Modal
+    elements.closePasswordModal.addEventListener('click', () => {
+        closeModalFunc(elements.passwordModal);
+    });
+
+    elements.submitPasswordBtn.addEventListener('click', handlePasswordSubmit);
+
+    // Allow Enter key to submit password
+    elements.adminPassword.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') handlePasswordSubmit();
+    });
+    elements.confirmPassword.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') handlePasswordSubmit();
+    });
+
+    elements.passwordModal.addEventListener('click', (e) => {
+        if (e.target === elements.passwordModal) {
+            closeModalFunc(elements.passwordModal);
+        }
+    });
+
+    // Customize Modal
     elements.closeModal.addEventListener('click', () => {
         closeModalFunc(elements.customizeModal);
     });
 
-    // Share button
-    elements.shareBtn.addEventListener('click', () => {
-        openModal(elements.shareModal);
-    });
-
-    // Close share modal
-    elements.closeShareModal.addEventListener('click', () => {
-        closeModalFunc(elements.shareModal);
-    });
-
-    // Close modals on backdrop click
-    [elements.customizeModal, elements.shareModal].forEach(modal => {
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModalFunc(modal);
-            }
-        });
-    });
-
-    // Close on Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
+    elements.customizeModal.addEventListener('click', (e) => {
+        if (e.target === elements.customizeModal) {
             closeModalFunc(elements.customizeModal);
-            closeModalFunc(elements.shareModal);
         }
     });
 
     // Save button
-    elements.saveBtn.addEventListener('click', () => {
+    elements.saveBtn.addEventListener('click', async () => {
         // Collect form data
         currentData = {
             ...currentData,
@@ -452,6 +612,14 @@ function initEventListeners() {
             theme: elements.inputTheme.value
         };
 
+        // Check if password change requested
+        const newPass = elements.changePassword.value;
+        if (newPass && newPass.length >= 4) {
+            const hash = await hashPassword(newPass);
+            setStoredPasswordHash(hash);
+            showToast('✅ Password updated!');
+        }
+
         saveData();
         updateUI();
         closeModalFunc(elements.customizeModal);
@@ -460,11 +628,33 @@ function initEventListeners() {
 
     // Reset button
     elements.resetBtn.addEventListener('click', () => {
-        if (confirm('Reset all customizations to defaults?')) {
+        if (confirm('Reset all page data to defaults? This will NOT reset your admin password.')) {
             resetData();
             updateFormInputs();
             updateUI();
             showToast('Reset to defaults');
+        }
+    });
+
+    // Theme live preview
+    elements.inputTheme.addEventListener('change', (e) => {
+        document.body.dataset.theme = e.target.value;
+    });
+
+    // Share button
+    elements.shareBtn.addEventListener('click', () => {
+        openModal(elements.shareModal);
+    });
+
+    // Close share modal
+    elements.closeShareModal.addEventListener('click', () => {
+        closeModalFunc(elements.shareModal);
+    });
+
+    // Close modals on backdrop click
+    elements.shareModal.addEventListener('click', (e) => {
+        if (e.target === elements.shareModal) {
+            closeModalFunc(elements.shareModal);
         }
     });
 
@@ -482,11 +672,6 @@ function initEventListeners() {
             closeModalFunc(elements.shareModal);
         });
     });
-
-    // Theme live preview
-    elements.inputTheme.addEventListener('change', (e) => {
-        document.body.dataset.theme = e.target.value;
-    });
 }
 
 // ========================================
@@ -500,13 +685,9 @@ function init() {
     updateDonorsList();
     initEventListeners();
 
-    // Add some demo data if first visit
-    if (!localStorage.getItem('bike4chai_data')) {
-        // Show a subtle animation hint
-        setTimeout(() => {
-            elements.customizeBtn.style.animation = 'pulse 1s ease 3';
-        }, 2000);
-    }
+    // Console hint for developers
+    console.log('%c🚴 Bike4Chai Page', 'font-size: 20px; font-weight: bold; color: #f97316;');
+    console.log('%cAdmin Access: Triple-click the logo or press Ctrl+Shift+E', 'color: #666;');
 }
 
 // Start application
