@@ -128,6 +128,8 @@ html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color-scheme: light only;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 body {
@@ -264,7 +266,7 @@ img {
 .container {
     width: 100%;
     max-width: 480px;
-    margin: 0;
+    margin: 0 auto;
     padding: 24px;
     padding-left: max(24px, env(safe-area-inset-left, 0px));
     padding-right: max(24px, env(safe-area-inset-right, 0px));
