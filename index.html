@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5">
+    <title>My Bike4Chai Journey | Ride for Chai Lifeline</title>
+    <meta name="description"
+        content="Support my Bike4Chai fundraising journey for Chai Lifeline. Every mile, every dollar makes a difference for children and families facing illness.">
+
+    <!-- Mobile Theme Color -->
+    <meta name="theme-color" content="#f97316">
+    <meta name="msapplication-navbutton-color" content="#f97316">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Apple Mobile Web App -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Bike4Chai">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Favicon (inline SVG as data URI) -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23f97316'/><text x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='50' fill='white'>🚴</text></svg>">
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:title" content="Support My Bike4Chai Ride!">
+    <meta property="og:description"
+        content="Join me in supporting Chai Lifeline through Bike4Chai. Track my progress and donate today!">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+        <div class="particles" id="particles"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="logo-section">
+                <div class="bike-icon">
+                    <svg viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Wheels with detail -->
+                        <circle cx="12" cy="34" r="9" stroke="currentColor" stroke-width="2" fill="none" />
+                        <circle cx="12" cy="34" r="3" stroke="currentColor" stroke-width="1.5" fill="none"
+                            opacity="0.5" />
+                        <circle cx="52" cy="34" r="9" stroke="currentColor" stroke-width="2" fill="none" />
+                        <circle cx="52" cy="34" r="3" stroke="currentColor" stroke-width="1.5" fill="none"
+                            opacity="0.5" />
+                        <!-- Dynamic frame -->
+                        <path d="M12 34 L28 18 L36 18 L44 34 L52 34" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M28 18 L32 34 L44 34" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <!-- Rider silhouette -->
+                        <ellipse cx="34" cy="10" rx="4" ry="5" fill="currentColor" />
+                        <path d="M30 16 C29 18 28 20 30 22" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" />
+                        <!-- Handlebars -->
+                        <path d="M36 18 L40 14 L44 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <!-- Speed lines -->
+                        <path d="M1 30 L5 30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            opacity="0.7" />
+                        <path d="M0 34 L6 34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            opacity="0.5" />
+                        <path d="M1 38 L5 38" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            opacity="0.7" />
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-main">BIKE4CHAI</span>
+                    <span class="logo-sub">My Journey</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn-customize" id="customizeBtn" title="Customize">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3" />
+                        <path
+                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                    </svg>
+                </button>
+                <button class="btn-share" id="shareBtn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="18" cy="5" r="3" />
+                        <circle cx="6" cy="12" r="3" />
+                        <circle cx="18" cy="19" r="3" />
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                    </svg>
+                    Share
+                </button>
+            </div>
+        </header>
+
+        <!-- Hero Profile Section -->
+        <section class="hero-profile">
+            <div class="profile-image-container">
+                <div class="profile-ring"></div>
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect fill='%234F46E5' width='200' height='200'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-size='80' font-family='Arial'%3E👤%3C/text%3E%3C/svg%3E"
+                    alt="Profile" class="profile-image" id="profileImage">
+                <div class="profile-badge">
+                    <!-- Verified rider badge -->
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M12 2L14.4 4.4L17.6 3.6L18.4 6.8L21.6 7.6L20.8 10.8L23.2 13.2L21.6 16.4L22.4 19.6L19.2 20.4L17.6 23.2L14.4 21.6L12 24L9.6 21.6L6.4 22.4L5.6 19.2L2.4 18.4L3.2 15.2L0.8 12.8L3.2 10.4L2.4 7.2L5.6 6.4L6.4 3.2L9.6 4L12 2Z"
+                            fill="currentColor" />
+                        <path d="M8 12l3 3 5-6" stroke="white" stroke-width="2.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+            </div>
+            <h1 class="rider-name" id="riderName">Your Name Here</h1>
+            <p class="rider-tagline" id="riderTagline">Riding for a cause that matters ❤️</p>
+            <div class="team-badge" id="teamBadge">
+                <span class="team-icon">🚴</span>
+                <span class="team-name" id="teamName">Team Chai</span>
+            </div>
+        </section>
+
+        <!-- Fundraising Progress -->
+        <section class="progress-section">
+            <div class="progress-card">
+                <div class="progress-header">
+                    <div class="progress-label">
+                        <span class="label-icon">🎯</span>
+                        <span>Fundraising Goal</span>
+                    </div>
+                    <div class="progress-percentage" id="progressPercent">0%</div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress-glow"></div>
+                    </div>
+                    <div class="progress-milestones">
+                        <span class="milestone" style="left: 25%">25%</span>
+                        <span class="milestone" style="left: 50%">50%</span>
+                        <span class="milestone" style="left: 75%">75%</span>
+                    </div>
+                </div>
+                <div class="progress-amounts">
+                    <div class="amount-raised">
+                        <span class="amount-value" id="amountRaised">$0</span>
+                        <span class="amount-label">Raised</span>
+                    </div>
+                    <div class="amount-divider">
+                        <div class="divider-line"></div>
+                        <span class="divider-text">of</span>
+                        <div class="divider-line"></div>
+                    </div>
+                    <div class="amount-goal">
+                        <span class="amount-value" id="amountGoal">$5,000</span>
+                        <span class="amount-label">Goal</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Grid -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card stat-donors">
+                    <div class="stat-icon">
+                        <!-- Stylized group of supporters -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <circle cx="9" cy="7" r="3" />
+                            <circle cx="15" cy="7" r="3" />
+                            <path d="M5.5 21v-2a4 4 0 0 1 4-4h5a4 4 0 0 1 4 4v2" />
+                            <circle cx="12" cy="4" r="2" fill="currentColor" opacity="0.3" />
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-value" id="donorCount">0</span>
+                        <span class="stat-label">Donors</span>
+                    </div>
+                </div>
+                <div class="stat-card stat-days">
+                    <div class="stat-icon">
+                        <!-- Stylized countdown/calendar -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <rect x="3" y="4" width="18" height="18" rx="3" />
+                            <path d="M16 2v4M8 2v4M3 10h18" />
+                            <circle cx="12" cy="16" r="2" fill="currentColor" />
+                            <path d="M12 14v-2" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-value" id="daysLeft">--</span>
+                        <span class="stat-label">Days Left</span>
+                    </div>
+                </div>
+                <div class="stat-card stat-miles">
+                    <div class="stat-icon">
+                        <!-- Stylized road/route -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M4 19l4-14h8l4 14" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M12 8v2m0 3v2m0 3v2" stroke-linecap="round" stroke-dasharray="2 3" />
+                            <circle cx="12" cy="5" r="2" fill="currentColor" />
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-value" id="milesRiding">180</span>
+                        <span class="stat-label">Miles</span>
+                    </div>
+                </div>
+                <div class="stat-card stat-rank">
+                    <div class="stat-icon">
+                        <!-- Stylized medal/trophy -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <circle cx="12" cy="10" r="6" />
+                            <path d="M12 4V2M8 16l-2 6 4-2 2 2M16 16l2 6-4-2-2 2" />
+                            <circle cx="12" cy="10" r="2.5" fill="currentColor" opacity="0.3" />
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-value" id="riderRank">#--</span>
+                        <span class="stat-label">Rank</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Donate CTA -->
+        <section class="cta-section">
+            <a href="#" class="donate-btn" id="donateBtn">
+                <span class="donate-icon">❤️</span>
+                <span class="donate-text">Donate Now</span>
+                <span class="donate-arrow">→</span>
+            </a>
+            <p class="cta-subtext">Every dollar supports Chai Lifeline families</p>
+        </section>
+
+        <!-- Message Section -->
+        <section class="message-section">
+            <div class="message-card">
+                <div class="message-header">
+                    <span class="message-icon">💬</span>
+                    <h3>My Story</h3>
+                </div>
+                <p class="message-text" id="riderMessage">
+                    I'm riding in Bike4Chai because I believe in the incredible work Chai Lifeline does for children and
+                    families facing serious illness. Every mile I ride represents hope, and every donation brings us
+                    closer to making a real difference. Join me on this journey!
+                </p>
+            </div>
+        </section>
+
+        <!-- Recent Donors -->
+        <section class="donors-section">
+            <div class="section-header">
+                <h3>
+                    <span class="section-icon">🌟</span>
+                    Recent Supporters
+                </h3>
+            </div>
+            <div class="donors-list" id="donorsList">
+                <div class="donor-card">
+                    <div class="donor-avatar">JD</div>
+                    <div class="donor-info">
+                        <span class="donor-name">John Doe</span>
+                        <span class="donor-time">Just now</span>
+                    </div>
+                    <span class="donor-amount">$100</span>
+                </div>
+                <div class="donor-card">
+                    <div class="donor-avatar">SM</div>
+                    <div class="donor-info">
+                        <span class="donor-name">Sarah M.</span>
+                        <span class="donor-time">2 hours ago</span>
+                    </div>
+                    <span class="donor-amount">$50</span>
+                </div>
+                <div class="donor-card">
+                    <div class="donor-avatar">AK</div>
+                    <div class="donor-info">
+                        <span class="donor-name">Anonymous</span>
+                        <span class="donor-time">1 day ago</span>
+                    </div>
+                    <span class="donor-amount">$180</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Chai Lifeline -->
+        <section class="about-section">
+            <div class="about-card">
+                <div class="about-logo">
+                    <!-- Stylized Chai symbol -->
+                    <svg class="chai-logo" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="chaiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#E11D48" />
+                                <stop offset="100%" style="stop-color:#BE123C" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="30" cy="30" r="28" fill="url(#chaiGradient)" />
+                        <!-- Stylized Chai (חי) symbol -->
+                        <path d="M20 18 L20 38 C20 42 24 44 28 44" stroke="white" stroke-width="4" fill="none"
+                            stroke-linecap="round" />
+                        <path d="M38 18 L38 32 M38 18 C38 18 32 18 32 24 L32 44" stroke="white" stroke-width="4"
+                            fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <h3>About Chai Lifeline</h3>
+                <p>Chai Lifeline is the international children's health support network, dedicated to helping seriously
+                    ill children and their families. Through programs like Bike4Chai, we provide vital support services
+                    to those who need them most.</p>
+                <a href="https://www.chailifeline.org" target="_blank" class="learn-more-link">
+                    Learn More
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-badge">
+                <span>Powered by</span>
+                <strong>Bike4Chai</strong>
+            </div>
+            <div class="footer-links">
+                <a href="https://bike4chai.com" target="_blank">Visit Bike4Chai</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Customization Modal -->
+    <div class="modal-overlay" id="customizeModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Customize Your Page</h2>
+                <button class="modal-close" id="closeModal">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="inputName">Your Name</label>
+                    <input type="text" id="inputName" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="inputTagline">Tagline</label>
+                    <input type="text" id="inputTagline" placeholder="Your personal message">
+                </div>
+                <div class="form-group">
+                    <label for="inputTeam">Team Name</label>
+                    <input type="text" id="inputTeam" placeholder="Your team name">
+                </div>
+                <div class="form-group">
+                    <label for="inputGoal">Fundraising Goal ($)</label>
+                    <input type="number" id="inputGoal" placeholder="5000">
+                </div>
+                <div class="form-group">
+                    <label for="inputRaised">Amount Raised ($)</label>
+                    <input type="number" id="inputRaised" placeholder="0">
+                </div>
+                <div class="form-group">
+                    <label for="inputDonors">Number of Donors</label>
+                    <input type="number" id="inputDonors" placeholder="0">
+                </div>
+                <div class="form-group">
+                    <label for="inputDays">Days Until Ride</label>
+                    <input type="number" id="inputDays" placeholder="30">
+                </div>
+                <div class="form-group">
+                    <label for="inputMiles">Miles Riding</label>
+                    <input type="number" id="inputMiles" placeholder="180">
+                </div>
+                <div class="form-group">
+                    <label for="inputRank">Your Rank</label>
+                    <input type="number" id="inputRank" placeholder="1">
+                </div>
+                <div class="form-group">
+                    <label for="inputMessage">Your Story</label>
+                    <textarea id="inputMessage" rows="4" placeholder="Share why you're riding..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="inputDonateUrl">Donate URL</label>
+                    <input type="url" id="inputDonateUrl" placeholder="https://bike4chai.com/yourname">
+                </div>
+                <div class="form-group">
+                    <label for="inputTheme">Color Theme</label>
+                    <select id="inputTheme">
+                        <option value="orange">Sunshine Orange ☀️</option>
+                        <option value="blue">Ocean Blue 🌊</option>
+                        <option value="green">Forest Green 🌿</option>
+                        <option value="gradient">Purple Gradient 💜</option>
+                        <option value="pink">Rose Pink 🌸</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="resetBtn">Reset</button>
+                <button class="btn-primary" id="saveBtn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div class="modal-overlay" id="shareModal">
+        <div class="modal modal-share">
+            <div class="modal-header">
+                <h2>Share Your Page</h2>
+                <button class="modal-close" id="closeShareModal">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="share-buttons">
+                    <button class="share-option" data-share="whatsapp">
+                        <div class="share-icon whatsapp">💬</div>
+                        <span>WhatsApp</span>
+                    </button>
+                    <button class="share-option" data-share="facebook">
+                        <div class="share-icon facebook">📘</div>
+                        <span>Facebook</span>
+                    </button>
+                    <button class="share-option" data-share="twitter">
+                        <div class="share-icon twitter">🐦</div>
+                        <span>Twitter</span>
+                    </button>
+                    <button class="share-option" data-share="email">
+                        <div class="share-icon email">✉️</div>
+                        <span>Email</span>
+                    </button>
+                    <button class="share-option" data-share="copy">
+                        <div class="share-icon copy">📋</div>
+                        <span>Copy Link</span>
+                    </button>
+                </div>
+                <div class="share-preview">
+                    <p>Preview message:</p>
+                    <div class="preview-text" id="sharePreview">
+                        "Support my Bike4Chai ride for Chai Lifeline! Every donation helps families facing serious
+                        illness. 🚴❤️"
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
