@@ -205,8 +205,10 @@ img {
 }
 
 .orb-1 {
-    width: min(500px, 80vw);
-    height: min(500px, 80vw);
+    width: 80vw;
+    height: 80vw;
+    max-width: 500px;
+    max-height: 500px;
     background: var(--primary-light, hsl(35, 90%, 75%));
     top: -15%;
     right: -10%;
@@ -214,8 +216,10 @@ img {
 }
 
 .orb-2 {
-    width: min(350px, 60vw);
-    height: min(350px, 60vw);
+    width: 60vw;
+    height: 60vw;
+    max-width: 350px;
+    max-height: 350px;
     background: var(--primary, hsl(25, 95%, 80%));
     bottom: 15%;
     left: -5%;
@@ -223,8 +227,10 @@ img {
 }
 
 .orb-3 {
-    width: min(250px, 50vw);
-    height: min(250px, 50vw);
+    width: 50vw;
+    height: 50vw;
+    max-width: 250px;
+    max-height: 250px;
     background: var(--secondary-light, hsl(45, 100%, 85%));
     top: 40%;
     right: 20%;
@@ -1782,18 +1788,52 @@ img {
 
     html,
     body {
-        background-color: hsl(35, 40%, 97%) !important;
-        color: hsl(25, 30%, 18%) !important;
+        background-color: #f8f9fa !important;
+        color: #1f2937 !important;
     }
 
-    .container,
+    .app-wrapper {
+        background-color: transparent !important;
+    }
+
+    .container {
+        background-color: transparent !important;
+    }
+
     .modal,
     .progress-card,
     .stat-card,
     .donor-card,
     .about-card,
     .message-card {
-        background-color: inherit;
-        color: inherit;
+        background-color: #ffffff !important;
+        color: #1f2937 !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    span,
+    div {
+        color: inherit !important;
+    }
+
+    a {
+        color: inherit !important;
+    }
+
+    .rider-name,
+    .logo-main {
+        color: #111827 !important;
+    }
+
+    .donate-btn {
+        color: #ffffff !important;
+        background-color: #ea580c !important;
     }
 }
