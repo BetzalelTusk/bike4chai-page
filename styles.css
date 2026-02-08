@@ -134,30 +134,42 @@ html {
 
 body {
     font-family: var(--font-primary);
-    background-color: hsl(35, 40%, 97%);
-    background: var(--bg-primary);
+    background-color: #f3f4f6;
+    /* Light gray background */
     color: var(--text-primary);
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
-    /* Force light appearance */
-    color-scheme: light only;
-    -webkit-text-size-adjust: 100%;
+    min-height: 100vh;
+    overflow-y: scroll;
+    /* Force scrollbar */
 }
 
 .app-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* justify-content: removed to prevent top cropping */
     width: 100%;
     min-height: 100vh;
-    min-height: 100dvh;
-    padding: 0;
-    margin: 0;
+    padding: 40px 0;
+    box-sizing: border-box;
     position: relative;
     z-index: 1;
-    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    /* Optimized for PC readability */
+    margin: auto;
+    /* Vertically and horizontally centers */
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
+    position: relative;
+    z-index: 2;
 }
 
 a {
@@ -269,21 +281,7 @@ img {
    CONTAINER
    ======================================== */
 
-.container {
-    width: 100%;
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 24px;
-    padding-left: max(24px, env(safe-area-inset-left, 0px));
-    padding-right: max(24px, env(safe-area-inset-right, 0px));
-    flex: 1 0 auto;
-    min-height: 100vh;
-    min-height: 100dvh;
-    box-sizing: border-box;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-}
+
 
 /* ========================================
    HEADER
@@ -1788,7 +1786,7 @@ img {
 
     html,
     body {
-        background-color: #f8f9fa !important;
+        background-color: #f3f4f6 !important;
         color: #1f2937 !important;
     }
 
@@ -1797,7 +1795,8 @@ img {
     }
 
     .container {
-        background-color: transparent !important;
+        background-color: #ffffff !important;
+        box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.1) !important;
     }
 
     .modal,
