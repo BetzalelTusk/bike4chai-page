@@ -160,16 +160,81 @@ body {
 
 .main-card {
     width: 100%;
-    max-width: 600px;
-    /* Optimized for PC readability */
+    max-width: 1000px;
+    /* Wider for Desktop */
     margin: auto;
-    /* Vertically and horizontally centers */
-    padding: 40px;
+    padding: 50px;
     background-color: #ffffff;
-    border-radius: 24px;
-    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
+    border-radius: 32px;
+    box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.12), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
     position: relative;
     z-index: 2;
+
+    /* PC Grid Layout */
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    /* Fixed Sidebar + Fluid Content */
+    gap: 0 60px;
+    /* Horizontal gap */
+    align-items: start;
+}
+
+/* Grid Areas */
+.header {
+    grid-column: 1 / -1;
+    margin-bottom: 20px;
+}
+
+.hero-profile {
+    grid-column: 1 / 2;
+    grid-row: 2 / 4;
+    text-align: center;
+}
+
+.message-section {
+    grid-column: 1 / 2;
+    grid-row: 4 / 5;
+}
+
+.progress-section {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
+
+.stats-section {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+}
+
+.donors-section {
+    grid-column: 2 / 3;
+    grid-row: 4 / 6;
+}
+
+.about-section {
+    grid-column: 1 / -1;
+    margin-top: 40px;
+}
+
+.footer {
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 900px) {
+    .main-card {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+        gap: 30px;
+    }
+
+    .hero-profile,
+    .message-section,
+    .progress-section,
+    .stats-section,
+    .donors-section {
+        grid-column: 1 / -1;
+        grid-row: auto;
+    }
 }
 
 a {
