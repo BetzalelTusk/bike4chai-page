@@ -160,80 +160,52 @@ body {
 
 .main-card {
     width: 100%;
-    max-width: 1000px;
+    max-width: 600px;
     margin: 0 auto;
-    /* Explicit horizontal centering */
-    padding: 50px;
+    padding: 40px;
     background-color: #ffffff;
-    border-radius: 32px;
-    box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.12), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
     position: relative;
     z-index: 2;
     box-sizing: border-box;
-
-    /* PC Grid Layout */
-    display: grid;
-    grid-template-columns: 350px 1fr;
-    gap: 0 60px;
-    align-items: start;
+    overflow: hidden;
+    /* Prevents ANY content from escaping */
 }
 
-/* Grid Areas */
+/* All sections stack vertically - simple layout */
 .header {
-    grid-column: 1 / -1;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 }
 
 .hero-profile {
-    grid-column: 1 / 2;
-    grid-row: 2 / 4;
     text-align: center;
-}
-
-.message-section {
-    grid-column: 1 / 2;
-    grid-row: 4 / 5;
+    margin-bottom: 32px;
 }
 
 .progress-section {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
+    margin-bottom: 24px;
 }
 
 .stats-section {
-    grid-column: 2 / 3;
-    grid-row: 3 / 4;
+    margin-bottom: 24px;
+}
+
+.message-section {
+    margin-bottom: 24px;
 }
 
 .donors-section {
-    grid-column: 2 / 3;
-    grid-row: 4 / 6;
+    margin-bottom: 24px;
 }
 
 .about-section {
-    grid-column: 1 / -1;
-    margin-top: 40px;
+    margin-bottom: 24px;
 }
 
 .footer {
-    grid-column: 1 / -1;
-}
-
-@media (max-width: 900px) {
-    .main-card {
-        grid-template-columns: 1fr;
-        max-width: 600px;
-        gap: 30px;
-    }
-
-    .hero-profile,
-    .message-section,
-    .progress-section,
-    .stats-section,
-    .donors-section {
-        grid-column: 1 / -1;
-        grid-row: auto;
-    }
+    margin-top: 16px;
+    text-align: center;
 }
 
 a {
