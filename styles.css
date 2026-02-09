@@ -149,10 +149,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: removed to prevent top cropping */
+    justify-content: flex-start;
     width: 100%;
     min-height: 100vh;
-    padding: 40px 0;
+    padding: 40px 20px;
     box-sizing: border-box;
     position: relative;
     z-index: 1;
@@ -161,21 +161,20 @@ body {
 .main-card {
     width: 100%;
     max-width: 1000px;
-    /* Wider for Desktop */
-    margin: auto;
+    margin: 0 auto;
+    /* Explicit horizontal centering */
     padding: 50px;
     background-color: #ffffff;
     border-radius: 32px;
     box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.12), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
     position: relative;
     z-index: 2;
+    box-sizing: border-box;
 
     /* PC Grid Layout */
     display: grid;
     grid-template-columns: 350px 1fr;
-    /* Fixed Sidebar + Fluid Content */
     gap: 0 60px;
-    /* Horizontal gap */
     align-items: start;
 }
 
